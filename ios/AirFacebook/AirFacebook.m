@@ -691,7 +691,27 @@ DEFINE_ANE_FUNCTION(webDialog)
 
 DEFINE_ANE_FUNCTION(activateApp)
 {
-	[FBAppEvents activateApp];
+    [FBAppEvents activateApp];
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(unlockedAchievementEvent)
+{
+    NSString *achievement = FPANE_FREObjectToNSString(argv[0]);
+    
+    [FBAppEvents logEvent:FBAppEventNameUnlockedAchievement
+               parameters:@{ FBAppEventParameterNameDescription    : achievement }];
+    
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(achievedLevelEvent)
+{
+    NSString *level = FPANE_FREObjectToNSString(argv[0]);
+    
+    [FBAppEvents logEvent:FBAppEventNameAchievedLevel
+               parameters:@{ FBAppEventParameterNameLevel    : level }];
+    
     return nil;
 }
 
@@ -700,7 +720,7 @@ void AirFacebookContextInitializer(void* extData, const uint8_t* ctxType, FRECon
                         uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet) 
 {
     // Register the links btwn AS3 and ObjC. (dont forget to modify the nbFuntionsToLink integer if you are adding/removing functions)
-    NSInteger nbFuntionsToLink = 18;
+    NSInteger nbFuntionsToLink = 20;
     *numFunctionsToTest = nbFuntionsToLink;
     
     FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
@@ -776,6 +796,14 @@ void AirFacebookContextInitializer(void* extData, const uint8_t* ctxType, FRECon
     func[17].name = (const uint8_t*) "activateApp";
     func[17].functionData = NULL;
     func[17].function = &activateApp;
+    
+    func[18].name = (const uint8_t*) "unlockedAchievementEvent";
+    func[18].functionData = NULL;
+    func[18].function = &unlockedAchievementEvent;
+    
+    func[19].name = (const uint8_t*) "achievedLevelEvent";
+    func[19].functionData = NULL;
+    func[19].function = &achievedLevelEvent;
     
     *functionsToSet = func;
     

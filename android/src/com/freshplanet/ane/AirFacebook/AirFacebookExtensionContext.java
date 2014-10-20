@@ -29,6 +29,7 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.freshplanet.ane.AirFacebook.functions.AchievedLevelEventFunction;
 import com.freshplanet.ane.AirFacebook.functions.ActivateAppFunction;
 import com.freshplanet.ane.AirFacebook.functions.CanPresentOpenGraphDialogFunction;
 import com.freshplanet.ane.AirFacebook.functions.CanPresentMessageDialogFunction;
@@ -46,6 +47,7 @@ import com.freshplanet.ane.AirFacebook.functions.SetUsingStage3dFunction;
 import com.freshplanet.ane.AirFacebook.functions.ShareLinkDialogFunction;
 import com.freshplanet.ane.AirFacebook.functions.ShareOpenGraphDialogFunction;
 import com.freshplanet.ane.AirFacebook.functions.ShareStatusDialogFunction;
+import com.freshplanet.ane.AirFacebook.functions.UnlockedAchievementEventFunction;
 import com.freshplanet.ane.AirFacebook.functions.WebDialogFunction;
 
 public class AirFacebookExtensionContext extends FREContext
@@ -79,6 +81,8 @@ public class AirFacebookExtensionContext extends FREContext
 		functions.put("webDialog", new WebDialogFunction());
 		functions.put("activateApp", new ActivateAppFunction());
 		functions.put("setUsingStage3D", new SetUsingStage3dFunction());
+		functions.put("unlockedAchievementEvent", new UnlockedAchievementEventFunction());
+		functions.put("achievedLevelEvent", new AchievedLevelEventFunction());
 		return functions;	
 	}
 	

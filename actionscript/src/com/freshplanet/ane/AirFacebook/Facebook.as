@@ -117,6 +117,26 @@ package com.freshplanet.ane.AirFacebook
 			_context.call('activateApp');
 		}
 		
+		/**
+		 * Track an Achieved Level
+		 */
+		public function trackAchievedLevel(level:String) : void
+		{
+			if (!isSupported) return;
+			
+			_context.call('achievedLevelEvent', level);
+		}
+		
+		/**
+		 * Track an Unlocked Achievement
+		 */
+		public function trackUnlockedAchievement(achievement:String) : void
+		{
+			if (!isSupported) return;
+			
+			_context.call('unlockedAchievementEvent', achievement);
+		}
+		
 		
 		/** True if a Facebook session is open, false otherwise. */
 		public function get isSessionOpen() : Boolean
